@@ -1,0 +1,12 @@
+ul > li {
+  list-style: none;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.done {
+  text-decoration: line-through;
+  color: red;
+}
