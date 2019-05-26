@@ -7,16 +7,16 @@ class TodoObject extends React.Component {
     task: '',
     say: 'hello, world!',
   };
-  id = 3;
+  id = 0;
 
   constructor(props) {
     super(props);
-
-    this.state.thingsToDo = [
-      {id: 0, name: 'Clean the room', done: false},
-      {id: 1, name: 'Take out the trash', done: false},
-      {id: 2, name: 'Wash the car', done: false},
-    ];
+    // sample list
+    //this.state.thingsToDo = [
+    //  {id: 0, name: 'Clean the room', done: false},
+    //  {id: 1, name: 'Take out the trash', done: false},
+    //  {id: 2, name: 'Wash the car', done: false},
+    //];
 
     this.handleChange = this.handleChange.bind(this);
     this.addTask = this.addTask.bind(this);
@@ -69,9 +69,9 @@ class TodoObject extends React.Component {
   render() {
     return (
       <div>
-        <h1>Todo App React</h1>
         <div>
           <div>
+            <h3>Add task</h3>
             <input
               type="text"
               value={this.state.task}
@@ -79,14 +79,15 @@ class TodoObject extends React.Component {
             />
             <button onClick={this.addTask}>Add</button>
           </div>
+          <h2>
+            Todo ({this.state.thingsToDo.filter(things => !things.done).length})
+          </h2>
           <ul>
             {this.state.thingsToDo.map((item, index) => (
-              <li key={index} className={item.done ? 'done' : ''}>
-                <input
-                  type="checkbox"
-                  defaultChecked={item.done}
-                  onClick={this.markDone.bind(this, item.id)}
-                />{' '}
+              <li
+                key={index}
+                className={item.done ? 'done' : ''}
+                onClick={this.markDone.bind(this, item.id)}>
                 {item.name}
               </li>
             ))}
