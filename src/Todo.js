@@ -7,7 +7,6 @@ class TodoObject extends React.Component {
     task: '',
     say: 'hello, world!',
   };
-  id = 0;
 
   constructor(props) {
     super(props);
@@ -27,7 +26,7 @@ class TodoObject extends React.Component {
       return {
         task: '',
         thingsToDo: oldState.thingsToDo.concat([
-          {id: this.id++, name: oldState.task, done: false},
+          {name: oldState.task, done: false},
         ]),
       };
     }
@@ -51,13 +50,9 @@ class TodoObject extends React.Component {
   }
 
   markDone = (taskId, event) => {
-    let updatedThingsToDo = this.state.thingsToDo.map(thing => {
-      if (thing.id === taskId) {
-        thing.done = !thing.done;
-      }
-      return thing;
-    });
-    // update the state
+    let updatedThingsToDo = this.state.thingsToDo;
+    updatedThingsToDo[taskId].done = !updatedThingsToDo[taskId].done;
+
     this.setState(oldState => {
       return {
         task: oldState.task,
@@ -87,7 +82,7 @@ class TodoObject extends React.Component {
               <li
                 key={index}
                 className={item.done ? 'done' : ''}
-                onClick={this.markDone.bind(this, item.id)}>
+                onClick={this.markDone.bind(this, index)}>
                 {item.name}
               </li>
             ))}
